@@ -1,6 +1,6 @@
-/************************** Shino's Contribution *********************/
 package ASS.covaxx.controller;
 import ASS.covaxx.model.Practice;
+import ASS.covaxx.model.Practitioner;
 import ASS.covaxx.model.Session;
 import ASS.covaxx.repo.PracticeRepo;
 import ASS.covaxx.repo.PractitionerRepo;
@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 
 @Controller
+@CrossOrigin
 public class SessionController {
 
     @Autowired
@@ -26,17 +27,19 @@ public class SessionController {
     private PractitionerRepo practitioners;
 
     @GetMapping("/sessions")
-    private @ResponseBody
-    Collection<Session> getSessions(
-            @PathVariable String practiceID
-    ) {
-        Practice practice = this.practices.getById(practiceID);
-
-        if (practice == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no practice with this practiceId");
-
-        return sessions.find(practiceID, null, null);
+    private @ResponseBody Collection<Session> getAll(){
+        return this.sessions.getAll();
     }
+
+//            @PathVariable String practiceID
+//    ) {
+//        Practice practice = this.practices.getById(practiceID);
+//
+//        if (practice == null)
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no practice with this practiceId");
+//
+//        return sessions.find(practiceID, null, null);
+//    }
 
 
     @GetMapping("/sessions/{sessionID}")
@@ -140,6 +143,5 @@ public class SessionController {
     }
 
 }
-/************************** Shino's Contribution *********************/
 
 

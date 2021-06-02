@@ -1,7 +1,6 @@
-/************************** Shino's Contribution *********************/
-
 package ASS.covaxx.repo;
 
+import ASS.covaxx.model.Practitioner;
 import ASS.covaxx.model.Session;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,5 @@ public class SessionRepo {
 
         return this.mongo.find(query, Session.class) ;
     }
-
+    public Collection<Session> getAll() { return mongo.findAll(Session.class); }
 }
-
-
-/************************** Shino's Contribution *********************/
