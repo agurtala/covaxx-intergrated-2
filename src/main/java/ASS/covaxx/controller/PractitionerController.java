@@ -23,13 +23,13 @@ public class PractitionerController {
         return this.PractitionerRepo.getAll();
     }
 
-    @GetMapping("/practitioner/{practitionerId}")
+    @GetMapping("/practitioner/{practitionerID}")
     public @ResponseBody
     Practitioner getOne(
-            @PathVariable String practitionerId)
+            @PathVariable String practitionerID)
     {
 
-        Practitioner practitioner = this.PractitionerRepo.getById(practitionerId);
+        Practitioner practitioner = this.PractitionerRepo.getById(practitionerID);
 
         if (practitioner == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"There is no practitioner with this practitionerId");
@@ -41,10 +41,10 @@ public class PractitionerController {
     public @ResponseBody
     Practitioner createNew(@RequestBody Practitioner practitioner) {
 
-        if (practitioner.practitionerId == null)
+        if (practitioner.practitionerID == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practitioner must specify a practitionerId");
 
-        Practitioner existingPractitioner = this.PractitionerRepo.getById(practitioner.practitionerId);
+        Practitioner existingPractitioner = this.PractitionerRepo.getById(practitioner.practitionerID);
         if (existingPractitioner != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This practitionerId is already used");
         }
@@ -54,22 +54,18 @@ public class PractitionerController {
         return practitioner;
     }
 
-    @PatchMapping("/practitioner/{practitionerId}")
+    @PatchMapping("/practitioner/{practitionerID}")
     public @ResponseBody
-    Practitioner updateExisting(@PathVariable String practitionerId, @RequestBody Practitioner changes) {
+    Practitioner updateExisting(@PathVariable String practitionerID, @RequestBody Practitioner changes) {
 
-        Practitioner existingPractitioner = this.PractitionerRepo.getById(practitionerId);
+        Practitioner existingPractitioner = this.PractitionerRepo.getById(practitionerID);
 
         if(existingPractitioner == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This practitionerId does not exist");
         }
 
-        if (changes.practitionerFname != null) {
-            existingPractitioner.practitionerFname = changes.practitionerFname;
-        }
-
-        if (changes.practitionerLname != null) {
-            existingPractitioner.practitionerLname = changes.practitionerLname;
+        if (changes.practitionerName != null) {
+            existingPractitioner.practitionerName = changes.practitionerName;
         }
 
         this.PractitionerRepo.save(existingPractitioner);

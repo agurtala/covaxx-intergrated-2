@@ -95,7 +95,7 @@ public class CertificateController {
     @PostMapping("/certificate")
     private @ResponseBody
     Certificate createNew(
-            @PathVariable String patientID,
+//            @PathVariable String patientID,
             @RequestBody Certificate certificate
 
     ) {
@@ -103,7 +103,7 @@ public class CertificateController {
         if (certificate.certID != null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New certificate should not specify any ID");
 
-        certificate.patientID = patientID;
+//        certificate.patientID = patientID;
 
         validate(certificate);
 

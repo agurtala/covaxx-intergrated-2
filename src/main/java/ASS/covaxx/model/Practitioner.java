@@ -9,10 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Practitioner {
 
     @Id
-    public String practitionerId;
+    public String practitionerID;
 
-    public String practitionerFname;
-    public String practitionerLname;
+    public String practitionerName;
+
 
 
 }

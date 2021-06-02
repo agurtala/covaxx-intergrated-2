@@ -13,7 +13,7 @@ import java.util.Map;
 public class Session {
 
     @Id
-    public ObjectId sessionId;
+    public ObjectId sessionID;
 
     public Map<String, String> booking = new HashMap<>();
 

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Practice {
 
     @Id
-    public String practiceId;
+    public String practiceID;
 
     @Indexed
     public String practiceName;

@@ -39,13 +39,13 @@ public class SessionController {
     }
 
 
-    @GetMapping("/sessions/{sessionId}")
+    @GetMapping("/sessions/{sessionID}")
     public @ResponseBody
     Session getOne(
-            @PathVariable String sessionId)
+            @PathVariable String sessionID)
     {
 
-        Session session = this.sessions.getById(sessionId);
+        Session session = this.sessions.getById(sessionID);
 
         if (session == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"There is no sessions with this sessionId");
@@ -53,11 +53,11 @@ public class SessionController {
         return session;
     }
 
-    @PatchMapping("/sessions/{sessionId}")
+    @PatchMapping("/sessions/{sessionID}")
     public @ResponseBody
-    Session updateExisting(@PathVariable String sessionId, @RequestBody Session changes) {
+    Session updateExisting(@PathVariable String sessionID, @RequestBody Session changes) {
 
-        Session existingSession = this.sessions.getById(sessionId);
+        Session existingSession = this.sessions.getById(sessionID);
 
         if (existingSession == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This sessionId does not exist");
@@ -97,16 +97,16 @@ public class SessionController {
 
     @PostMapping("/sessions")
     private @ResponseBody
-    Session createNew(
-            @PathVariable String practiceID,
+    Session createSession(
+//            @PathVariable String practiceID,
             @RequestBody Session session
 
     ) {
 
-        if (session.sessionId != null)
+        if (session.sessionID != null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New sessions should not specify any ID");
 
-        session.practiceID = practiceID;
+//        session.practiceID = practiceID;
 
         validate(session);
 

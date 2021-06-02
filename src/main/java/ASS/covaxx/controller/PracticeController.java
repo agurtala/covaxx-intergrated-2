@@ -25,13 +25,13 @@ public class PracticeController {
         return this.PracticeRepo.find(practiceName);
     }
 
-    @GetMapping("/practices/{practiceId}")
+    @GetMapping("/practices/{practiceID}")
    public @ResponseBody
     Practice getOne(
-           @PathVariable String practiceId)
+           @PathVariable String practiceID)
     {
 
-        Practice practice = this.PracticeRepo.getById(practiceId);
+        Practice practice = this.PracticeRepo.getById(practiceID);
 
         if (practice == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"There is no practice with this practiceId");
@@ -43,10 +43,10 @@ public class PracticeController {
    public @ResponseBody
    Practice createNew(@RequestBody Practice practice) {
 
-       if (practice.practiceId == null)
+       if (practice.practiceID == null)
            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practice must specify a practice_Id");
 
-       Practice existingPractice = this.PracticeRepo.getById(practice.practiceId);
+       Practice existingPractice = this.PracticeRepo.getById(practice.practiceID);
        if (existingPractice != null) {
            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This practice_Id is already used");
        }
@@ -56,11 +56,11 @@ public class PracticeController {
         return practice;
    }
 
-   @PatchMapping("/practices/{practiceId}")
+   @PatchMapping("/practices/{practiceID}")
    public @ResponseBody
-   Practice updateExisting(@PathVariable String practiceId, @RequestBody Practice changes) {
+   Practice updateExisting(@PathVariable String practiceID, @RequestBody Practice changes) {
 
-        Practice existingPractice = this.PracticeRepo.getById(practiceId);
+        Practice existingPractice = this.PracticeRepo.getById(practiceID);
 
         if(existingPractice == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This practice_id does not exist");
